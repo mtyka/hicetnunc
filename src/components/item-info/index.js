@@ -79,6 +79,17 @@ export const ItemInfo = ({
     )
   }
 
+  const renderVerification = () => {
+    if(!token_info ||
+       !token_info.creator_metadata ||
+       !token_info.creator_metadata.data) return "";
+    const data = token_info.creator_metadata.data;
+    let alias = "";
+    if (data.twitter) alias += `@${data.twitter}`;
+    if (data.alias) alias += `  (${data.alias})`;
+    return alias || " !!UNVERIFIED!!";
+  }
+
   return (
     <>
       <div className={styles.container}>
@@ -86,7 +97,7 @@ export const ItemInfo = ({
           <div className={styles.inline}>
             <p>Issuer:&nbsp;</p>
             <Button to={`${PATH.ISSUER}/${token_info.creators[0]}`}>
-              <Primary>{walletPreview(token_info.creators[0])}</Primary>
+              <Primary>{walletPreview(token_info.creators[0])} {renderVerification()}</Primary>
             </Button>
           </div>
           {!feed && (

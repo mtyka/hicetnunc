@@ -8,6 +8,7 @@ import { Button, Primary } from '../../components/button'
 import { Page, Container, Padding } from '../../components/layout'
 import { renderMediaType } from '../../components/media-types'
 import { ItemInfo } from '../../components/item-info'
+import { GetUserMetadata } from '../../data/api'
 import { Menu } from '../../components/menu'
 import { Info, Collectors, Swap, Burn } from './tabs'
 
@@ -39,6 +40,10 @@ export const ObjktDisplay = () => {
         setLoading(false)
       } else {
         await context.setAccount()
+        // TODO (Eventually let the backend include this info directly)
+        await GetUserMetadata(objkt.token_info.creators[0]).then((data) => {
+          //objkt.token_info.creator_metadata = data;
+        })
         setNFT(objkt)
 
         setLoading(false)
@@ -55,7 +60,7 @@ export const ObjktDisplay = () => {
           }
           setLoading(false)
         }
-      )   
+      )
     }
   , [])
 
