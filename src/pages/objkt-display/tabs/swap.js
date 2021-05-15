@@ -25,7 +25,7 @@ export const Swap = ({ total_amount, owners, token_info, address }) => {
       setMessage("")
     }
 
-    if (value == "") {
+    if (value === "") {
       setPrice(value)
       setMessage("")
     }
